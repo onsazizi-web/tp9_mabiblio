@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'models/livre.dart';
+import 'widgets/livre_card.dart';
+import 'screens/catalogue_screen.dart';
 import 'data/livres_data.dart';
 import 'screens/parametres_screen.dart';void main() {
   runApp(const MyApp());
@@ -64,8 +66,21 @@ class _HomePageState extends State<HomePage> {
   children: livres.take(3).map(livreTile).toList(),
 ),
      appBar: AppBar(
+      
   title: const Text('MaBiblio'),
   actions: [
+    IconButton(
+  icon: const Icon(Icons.menu_book),
+  tooltip: 'Catalogue',
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CatalogueScreen(),
+      ),
+    );
+  },
+),
     IconButton(
       icon: const Icon(Icons.settings),
       onPressed: () {
@@ -73,6 +88,7 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(
             builder: (context) => const ParametresScreen(),
+            
           ),
         );
       },
