@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/livre.dart';
 import '../data/livres_data.dart';
 import '../widgets/livre_card.dart';
+import '../widgets/livre_grid_item.dart';
+import 'detail_screen.dart';
 
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
@@ -75,17 +77,28 @@ class CatalogueScreen extends StatelessWidget {
           // Q2.4, Q2.5 et Q2.6 :
           // builder construit les lignes à mesure qu'elles sont nécessaires.
           // Pour 1 000 livres, il évite de créer tous les widgets à l'avance.
-          Expanded(
-            child: ListView.separated(
-              itemCount: livres.length,
-              itemBuilder: (context, index) {
-                return livreTile(livres[index]);
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(indent: 72);
-              },
+
+Expanded(
+  child: ListView.builder(
+    itemCount: livres.length,
+    itemBuilder: (context, index) {
+      final livre = livres[index];
+
+      return LivreGrille(
+        livre: livre,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(livre: livre),
             ),
-          ),
+          );
+        },
+      );
+    },
+  ),
+),
+
         ],
       ),
     );
