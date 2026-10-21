@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../models/livre.dart';
 import 'livre_card.dart';
+import '../screens/detail_screen.dart';
 
 class LivreGrille extends StatelessWidget {
   final Livre livre;
@@ -29,7 +30,14 @@ class LivreGrille extends StatelessWidget {
       surfaceTintColor: Colors.blue.shade50,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: onTap,
+      onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => DetailScreen(livre: livre),
+    ),
+  );
+},
         child: livreTile(livre),
       ),
     );

@@ -21,10 +21,10 @@ class _DetailScreenState extends State<DetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Détail du livre'),
+        title: Text(livre.titre),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Card(
           elevation: 4,
           shape: RoundedRectangleBorder(
@@ -34,7 +34,6 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Couverture du livre
               Container(
                 height: 200,
                 color: livre.couleur,
@@ -44,35 +43,31 @@ class _DetailScreenState extends State<DetailScreen> {
                   livre.titre,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
 
-              // Auteur
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text('Auteur'),
                 subtitle: Text(livre.auteur),
               ),
 
-              // Année
               ListTile(
                 leading: const Icon(Icons.calendar_today),
                 title: const Text('Année'),
                 subtitle: Text('${livre.annee}'),
               ),
 
-              // Genre
               ListTile(
                 leading: const Icon(Icons.category),
                 title: const Text('Genre'),
                 subtitle: Text(livre.genre),
               ),
 
-              // Boutons d'action
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: OverflowBar(
@@ -80,7 +75,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   spacing: 8,
                   overflowSpacing: 8,
                   children: [
-                    TextButton.icon(
+                    OutlinedButton.icon(
                       onPressed: () {
                         setState(() {
                           livre.favori = !livre.favori;
@@ -90,7 +85,6 @@ class _DetailScreenState extends State<DetailScreen> {
                         livre.favori
                             ? Icons.favorite
                             : Icons.favorite_border,
-                        color: Colors.red,
                       ),
                       label: Text(
                         livre.favori
@@ -99,20 +93,15 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
 
-                    FilledButton.icon(
+                    ElevatedButton(
                       onPressed: () {
                         setState(() {
                           livre.lu = !livre.lu;
                         });
                       },
-                      icon: Icon(
+                      child: Text(
                         livre.lu
-                            ? Icons.check_circle
-                            : Icons.check_circle_outline,
-                      ),
-                      label: Text(
-                        livre.lu
-                            ? 'Déjà lu'
+                            ? 'Marquer comme non lu'
                             : 'Marquer comme lu',
                       ),
                     ),
