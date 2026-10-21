@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'models/livre.dart';
 import 'widgets/livre_card.dart';
+import 'screens/ma_liste_screen.dart';
 import 'screens/catalogue_screen.dart';
 import 'data/livres_data.dart';
 import 'screens/parametres_screen.dart';void main() {
@@ -70,6 +71,19 @@ class _HomePageState extends State<HomePage> {
   title: const Text('MaBiblio'),
   actions: [
     IconButton(
+  icon: const Icon(Icons.checklist),
+  tooltip: 'Ma liste',
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MaListeScreen(),
+      ),
+    );
+  },
+),
+    IconButton(
+
   icon: const Icon(Icons.menu_book),
   tooltip: 'Catalogue',
   onPressed: () {
