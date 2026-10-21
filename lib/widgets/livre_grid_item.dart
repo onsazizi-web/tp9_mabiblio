@@ -1,44 +1,70 @@
 
 import 'package:flutter/material.dart';
 import '../models/livre.dart';
-import 'livre_card.dart';
 import '../screens/detail_screen.dart';
 
-class LivreGrille extends StatelessWidget {
+class LivreGridItem extends StatelessWidget {
   final Livre livre;
-  final VoidCallback? onTap;
 
-  const LivreGrille({
+  const LivreGridItem({
     super.key,
     required this.livre,
-    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 6,
-      ),
+      color: livre.couleur,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      shadowColor: Colors.black54,
-      color: Colors.white,
-      surfaceTintColor: Colors.blue.shade50,
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-      onTap: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => DetailScreen(livre: livre),
-    ),
-  );
-},
-        child: livreTile(livre),
+      child: Stack(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.menu_book,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    livre.titre,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    livre.auteur,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (livre.favori)
+            const Positioned(
+              top: 8,
+              right: 8,
+              child: Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ),
+            ),
+        ],
       ),
     );
   }
