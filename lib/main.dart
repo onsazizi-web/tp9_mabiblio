@@ -5,7 +5,10 @@ import 'widgets/livre_card.dart';
 import 'screens/ma_liste_screen.dart';
 import 'screens/catalogue_screen.dart';
 import 'data/livres_data.dart';
-import 'screens/parametres_screen.dart';void main() {
+import 'screens/galerie_screen.dart';
+
+import 'screens/parametres_screen.dart';
+void main() {
   runApp(const MyApp());
 }
 
@@ -20,7 +23,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const HomePage(),
+     home: const HomePage(),
+
     );
   }
 }
@@ -70,6 +74,20 @@ class _HomePageState extends State<HomePage> {
       
   title: const Text('MaBiblio'),
   actions: [
+    
+IconButton(
+  icon: const Icon(Icons.grid_view),
+  tooltip: 'Galerie',
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const GalerieScreen(),
+      ),
+    );
+  },
+),
+
     IconButton(
   icon: const Icon(Icons.checklist),
   tooltip: 'Ma liste',
